@@ -6,6 +6,12 @@ export let action: ActionFunction = async ({request}) => {
   let email = formData.get("email");
   console.log({email});
   
+  if (!email?.toString().endsWith(".com")) {
+    return {
+      error: "true",
+      message: "Invalid Email!"
+    }
+  }
   // Simulate sending email
   setTimeout(() => {
     console.log("Email sent!");
