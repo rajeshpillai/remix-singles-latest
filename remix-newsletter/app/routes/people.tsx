@@ -6,8 +6,13 @@ export async function loader() {
   return [
     {
       id: +new Date(), 
-      firstName: "Rajesh",
-      lastName: "Pillai"
+      firstName: "Karna",
+      lastName: "P"
+    },
+    {
+      id: +new Date(), 
+      firstName: "Arjun",
+      lastName: "P"
     },
   ]
 }
@@ -18,7 +23,7 @@ export let action: ActionFunction = async ({request}) => {
 export default function Newsletter() {
   const people = useLoaderData();
   return (
-    <main>
+    <div>
       <h1>People</h1>
       { people.length ? (
         <ul>
@@ -29,6 +34,6 @@ export default function Newsletter() {
       ) : (
         <h2>No one around here!</h2>
       )}
-    </main>
+    </div>
   );
 }
