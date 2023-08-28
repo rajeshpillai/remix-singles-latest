@@ -2,6 +2,11 @@ import {Form, Link, useActionData} from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 
 export let action: ActionFunction = async ({request}) => {
+  // Delay to show browser is handling the pending state
+  // Demo with <Form reloadDocument ... />
+  
+  await new Promise((res) => setTimeout(res, 1000));
+
   let formData = await request.formData();
   let email = formData.get("email");
   console.log({email});
@@ -25,7 +30,7 @@ export default function Newsletter() {
   console.log({state});
   return (
     <main>
-      <Form  method = "post" aria-hidden={state === "success"}>
+      <Form   method = "post" aria-hidden={state === "success"}>
         <h2>Subscribe!</h2>
         <p>Don't miss any of the action!</p>
         <fieldset>
