@@ -6,3 +6,7 @@
 - Add temp delay
 - useNavigation (useTransition hook)
   - Show disabling form on submitting
+- Focus management
+  - useRef
+  - aria for accessibility
+  - tabIndex -1 (focus via code and not when actually tabbing)

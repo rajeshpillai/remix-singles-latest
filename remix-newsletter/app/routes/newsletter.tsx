@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {Form, Link, useActionData, useNavigation} from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 
@@ -31,6 +32,11 @@ export default function Newsletter() {
   const navigation = useNavigation();
   //"idle" | "loading"  | "submitting" 
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  // For first time mounting
+  const mounted = useRef<boolean>(false);
+
   console.log("navigation.state: ", navigation.state);
   let state = navigation.state;
   if (state == "submitting") {
@@ -43,16 +49,34 @@ export default function Newsletter() {
       state = "idle";
   }
 
-  // state =  actionData?.error ? "error" : state;
+  useEffect(() => {
+    if (state === "error") {
+      inputRef.current?.focus();
+    }
 
-  console.log({state});
+    // Select only if already mounted
+    if (state === "idle" && mounted.current) {
+      inputRef.current?.select();
+    }
+
+    if (state === "success") {
+      successRef.current?.focus();
+    }
+
+    mounted.current = true;
+  }, [state]);
+
   return (
     <main>
       <Form   method = "post" aria-hidden={state === "success"}>
         <h2>Subscribe!</h2>
         <p>Don't miss any of the action!</p>
         <fieldset disabled ={state == "submitting"}>
-          <input type="email" name="email" placeholder="you@example.com" />
+          <input ref={inputRef} type="email" 
+             aria-label="Email address"
+             aria-describedby="error-message"
+            name="email" placeholder="you@example.com" 
+            />
           <button type="submit">
             {state === "submitting" ? "Subscribing..." : "Subscribe"}
           </button>
@@ -62,7 +86,9 @@ export default function Newsletter() {
         </p>
       </Form>
       <div aria-hidden={state !== "success"}>
-        <h2>You're subscribed!</h2>
+        <h2 ref={successRef} tabIndex={-1}>
+          You're subscribed!
+        </h2>
         <p>Please check your email to confirm your subscription.</p>
         <Link to=".">Start over</Link>
       </div>
