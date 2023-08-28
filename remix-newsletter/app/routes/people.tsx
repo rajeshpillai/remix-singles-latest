@@ -3,18 +3,23 @@ import {Form, Link, useActionData, useLoaderData, useNavigation} from "@remix-ru
 import type { ActionFunction } from "@remix-run/node";
 
 export async function loader() {
-  return [
-    {
-      id: +new Date(), 
-      firstName: "Karna",
-      lastName: "P"
-    },
-    {
-      id: +new Date(), 
-      firstName: "Arjun",
-      lastName: "P"
-    },
-  ]
+  // return [
+  //   {
+  //     id: +new Date(), 
+  //     firstName: "Karna",
+  //     lastName: "P"
+  //   },
+  //   {
+  //     id: +new Date(), 
+  //     firstName: "Arjun",
+  //     lastName: "P"
+  //   },
+  // ]
+
+  const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+  const data = await resp.json();
+
+  return data;
 }
 
 export let action: ActionFunction = async ({request}) => {
@@ -28,7 +33,7 @@ export default function Newsletter() {
       { people.length ? (
         <ul>
           {people.map(p => (
-            <li key={p.id}>{p.firstName} {p.lastName}</li>
+            <li key={p.id}>{p.name} ({p.username})</li>
           ))}
         </ul> 
       ) : (

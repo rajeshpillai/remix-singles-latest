@@ -14,4 +14,5 @@
 
 ## Loading data into components
 - Create a people route (routes/people.tsx)
-- 
+- Load hardcoded data
+- Load from API (json typicode)
