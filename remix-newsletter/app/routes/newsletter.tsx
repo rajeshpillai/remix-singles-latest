@@ -19,7 +19,7 @@ export default function Newsletter() {
   console.log({state});
   return (
     <main>
-      <Form reloadDocument method = "post" aria-hidden={state === "success"}>
+      <Form  method = "post" aria-hidden={state === "success"}>
         <h2>Subscribe!</h2>
         <p>Don't miss any of the action!</p>
         <fieldset>
