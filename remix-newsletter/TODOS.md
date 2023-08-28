@@ -1,6 +1,7 @@
 # Steps for the demo
+## Newsletter demo
 - Build a new remix app
-- Create a newsletter form with CSS and aria for animation
+- Create a newsletter form with CSS and aria for animation (routes/newsletter.tsx)
 - Add reloadDocument in the <Form reloadDocument... /> to demonstrate server side state
 - Add email validation
 - Add temp delay
@@ -10,3 +11,7 @@
   - useRef
   - aria for accessibility
   - tabIndex -1 (focus via code and not when actually tabbing)
+
+## Loading data into components
+- Create a people route (routes/people.tsx)
+- 
