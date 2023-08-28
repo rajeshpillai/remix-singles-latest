@@ -4,3 +4,5 @@
 - Add reloadDocument in the <Form reloadDocument... /> to demonstrate server side state
 - Add email validation
 - Add temp delay
+- useNavigation (useTransition hook)
+  - Show disabling form on submitting
