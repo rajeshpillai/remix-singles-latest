@@ -28,4 +28,17 @@
 
 ## Pending UI
 - Show pending UI (other button side effect)
+let busy = navigation.state; 
+
+ <button className="btn-sm" type="submit" 
+      name="_action" value="create">
+        { busy =="submitting" ? "Adding..." : "Add(Bad)"}
+    </button>
+- Fix Pending UI state
+ let isAdding = navigation.state === "submitting" &&
+  navigation.formData.get("_action") === "create";
+  <button className="btn-sm" type="submit" 
+    name="_action" value="create" disabled={isAdding}>
+      { isAdding  ? "Adding..." : "Add"}
+  </button>
  

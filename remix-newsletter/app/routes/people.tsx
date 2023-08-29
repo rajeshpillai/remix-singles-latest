@@ -50,7 +50,11 @@ export default function People() {
   const people = useLoaderData();
 
   const navigation = useNavigation();
-  let busy = navigation.state;
+  let busy = navigation.state; // Other UI side effects (including clicking delete button)
+
+  // Fix UI state for adding
+  let isAdding = navigation.state === "submitting" &&
+    navigation.formData.get("_action") === "create";
 
   return (
     <div>
@@ -76,8 +80,8 @@ export default function People() {
               <input type="text" name="name" /> {" "}
               <input type="text" name="username" /> {" "}
               <button className="btn-sm" type="submit" 
-                name="_action" value="create">
-                  { busy =="submitting" ? "Adding..." : "Add"}
+                name="_action" value="create" disabled={isAdding}>
+                  { isAdding  ? "Adding..." : "Add"}
               </button>
             </Form>
           </li>
