@@ -25,5 +25,7 @@
 
 ## Multiple Forms and Single Button Mutations
 - Add a delete button
-- Clear input after submit 
+
+## Pending UI
+- Show pending UI (other button side effect)
  

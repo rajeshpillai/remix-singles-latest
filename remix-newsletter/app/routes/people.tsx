@@ -46,8 +46,12 @@ export let action: ActionFunction = async ({request}) => {
   }
 }
 
-export default function Newsletter() {
+export default function People() {
   const people = useLoaderData();
+
+  const navigation = useNavigation();
+  let busy = navigation.state;
+
   return (
     <div>
       <h1>People</h1>
@@ -71,7 +75,10 @@ export default function Newsletter() {
             <Form method="post">
               <input type="text" name="name" /> {" "}
               <input type="text" name="username" /> {" "}
-              <button className="btn-sm" type="submit" name="_action" value="create">Add</button>
+              <button className="btn-sm" type="submit" 
+                name="_action" value="create">
+                  { busy =="submitting" ? "Adding..." : "Add"}
+              </button>
             </Form>
           </li>
         </ul> 
