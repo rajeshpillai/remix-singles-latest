@@ -17,3 +17,8 @@
 - Load hardcoded data
 - Load from API (json typicode)
 - Wrapper for loader
+- 
+## Data mutations with form + action
+- Add <Form>
+- Add form submit 
+- Abstract DB (in-memory)

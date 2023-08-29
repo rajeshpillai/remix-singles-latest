@@ -51,7 +51,7 @@ app.listen(port, async () => {
   console.log(`Express server listening on port ${port}`);
 
   if (process.env.NODE_ENV === "development") {
-    broadcastDevReady(build);
+    // broadcastDevReady(build);
   }
 });
 

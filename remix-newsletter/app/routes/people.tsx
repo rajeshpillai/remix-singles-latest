@@ -3,6 +3,8 @@ import {Form, Link, useActionData, useLoaderData, useNavigation} from "@remix-ru
 import type { ActionFunction } from "@remix-run/node";
 import { Api } from "~/utils/api.server";
 
+import {store} from "../../db/store";
+
 export async function loader() {
   // return [
   //   {
@@ -20,12 +22,20 @@ export async function loader() {
   // const resp = await fetch('https://jsonplaceholder.typicode.com/users')
   // const data = await resp.json();
 
-  const data = Api.users.all();
-  return data;
+  if (store.users.length == 0) {
+    const data = await Api.users.all();
+    store.users = data;
+  }
+  return store.users;
 }
 
 export let action: ActionFunction = async ({request}) => {
-  return { subscription: true};
+  let formData = await request.formData();
+  let values = Object.fromEntries(formData);
+  
+  const data = await Api.users.insert(values);
+  console.log("response: ", data);
+  return { success: true, data};
 }
 export default function Newsletter() {
   const people = useLoaderData();
@@ -37,6 +47,13 @@ export default function Newsletter() {
           {people.map(p => (
             <li key={p.id}>{p.name} ({p.username})</li>
           ))}
+          <li>
+            <Form method="post">
+              <input type="text" name="name" /> {" "}
+              <input type="text" name="username" /> {" "}
+              <button type="submit">Add</button>
+            </Form>
+          </li>
         </ul> 
       ) : (
         <h2>No one around here!</h2>
