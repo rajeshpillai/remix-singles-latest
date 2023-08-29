@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import {Form, Link, useActionData, useLoaderData, useNavigation} from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
+import { Api } from "~/utils/api.server";
 
 export async function loader() {
   // return [
@@ -16,9 +17,10 @@ export async function loader() {
   //   },
   // ]
 
-  const resp = await fetch('https://jsonplaceholder.typicode.com/users')
-  const data = await resp.json();
+  // const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+  // const data = await resp.json();
 
+  const data = Api.users.all();
   return data;
 }
 
