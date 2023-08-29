@@ -56,6 +56,17 @@ export default function People() {
   let isAdding = navigation.state === "submitting" &&
     navigation.formData.get("_action") === "create";
 
+  let formRef = useRef();
+  let nameRef = useRef();
+
+  useEffect(() => {
+    // If submission done and back to idle
+    if (!isAdding) {
+      formRef.current.reset();
+      nameRef.current?.focus();
+    }
+  }, [isAdding])
+
   return (
     <div>
       <h1>People</h1>
@@ -76,8 +87,8 @@ export default function People() {
             </li>
           ))}
           <li>
-            <Form method="post">
-              <input type="text" name="name" /> {" "}
+            <Form ref={formRef} method="post">
+              <input ref={nameRef} type="text" name="name" /> {" "}
               <input type="text" name="username" /> {" "}
               <button className="btn-sm" type="submit" 
                 name="_action" value="create" disabled={isAdding}>

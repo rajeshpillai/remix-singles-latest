@@ -42,3 +42,5 @@ let busy = navigation.state;
       { isAdding  ? "Adding..." : "Add"}
   </button>
  
+## Clearing inputs after submission
+- Clear and set focus (browser does automatically)
