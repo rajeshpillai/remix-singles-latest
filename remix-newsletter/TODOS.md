@@ -21,4 +21,9 @@
 ## Data mutations with form + action
 - Add <Form>
 - Add form submit 
-- Abstract DB (in-memory)
+- Abstract DB (in-memory) (show demo by disabling JS about:config in firefox)
+
+## Multiple Forms and Single Button Mutations
+- Add a delete button
+- Clear input after submit 
+ 

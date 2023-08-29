@@ -31,12 +31,21 @@ export async function loader() {
 
 export let action: ActionFunction = async ({request}) => {
   let formData = await request.formData();
-  let values = Object.fromEntries(formData);
+  // let values = Object.fromEntries(formData);
+
+  let {_action, ...values} = Object.fromEntries(formData);
   
-  const data = await Api.users.insert(values);
-  console.log("response: ", data);
-  return { success: true, data};
+  if (_action === "create") {
+    const data = await Api.users.insert(values);
+    console.log("response: ", data);
+    return { success: true, data};
+  }
+
+  if (_action === "delete") {
+    return await Api.users.delete(values);
+  }
 }
+
 export default function Newsletter() {
   const people = useLoaderData();
   return (
@@ -45,13 +54,24 @@ export default function Newsletter() {
       { people.length ? (
         <ul>
           {people.map(p => (
-            <li key={p.id}>{p.name} ({p.username})</li>
+            <li key={p.id}>{p.name} ({p.username}) { " "}
+              <Form method="post" 
+                style={{display: "inline"}}>
+                <input type="hidden" name="id" value={p.id} />
+                <button 
+                  type="submit" aria-label="delete" name="_action" 
+                  className="btn-sm"
+                  value="delete">
+                  x
+                </button>
+              </Form>
+            </li>
           ))}
           <li>
             <Form method="post">
               <input type="text" name="name" /> {" "}
               <input type="text" name="username" /> {" "}
-              <button type="submit">Add</button>
+              <button className="btn-sm" type="submit" name="_action" value="create">Add</button>
             </Form>
           </li>
         </ul> 

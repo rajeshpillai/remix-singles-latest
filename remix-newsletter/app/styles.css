@@ -84,6 +84,14 @@ button {
   color: white;
 }
 
+.btn-sm {
+  width: 4rem;
+  text-align: center;
+  background: hsl(243deg 85% 73%);
+  border-color: hsl(243deg 85% 63%);
+  color: white;
+}
+
 button:active {
   background: hsl(243deg 85% 63%);
 }
