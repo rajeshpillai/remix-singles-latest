@@ -48,7 +48,9 @@ export let action: ActionFunction = async ({request}) => {
   if (_action === "delete") {
     // Added delay to see the opacity effect
     try {
-      throw new Error("Kaboom!!!");
+      if (Math.random() > 0.5) {
+        throw new Error("Kaboom!!!");
+      }
       //await new Promise((res) => setTimeout(res, Math.random() * 2000));
       const result = await Api.users.delete(values);
       return result;
@@ -110,25 +112,35 @@ export default function People() {
 function PersonItem({person}) {
   let fetcher = useFetcher();
 
+  let isFailedDeletion = fetcher.data?.error;
+
   // let navigation = useNavigation();
   // let isDeleting = navigation.formData?.get("id") == person.id ;
   let isDeleting = fetcher.formData?.get("id") == person.id ;
 
-  return <li hidden={isDeleting}
-    // style={{
-    //   opacity: isDeleting ? 0.25 : 1,
-    // }}
-    key={person.id}>
-    {person.name} ({person.username}) { " "}
-    <fetcher.Form method="post" 
-      style={{display: "inline"}}>
-      <input type="hidden" name="id" value={person.id} />
-      <button 
-        type="submit" aria-label="delete" name="_action" 
-        className="btn-sm"
-        value="delete">
-        x
-      </button>
-    </fetcher.Form>
-  </li>
+  return (
+    <li hidden={isDeleting} 
+      style={{
+        color: isFailedDeletion ? "red": ""
+      }}
+      // style={{
+      //   opacity: isDeleting ? 0.25 : 1,
+      // }}
+      key={person.id}>
+      {person.name} ({person.username}) { " "}
+      <fetcher.Form method="post" 
+        style={{
+          display: "inline",
+        }}>
+        <input type="hidden" name="id" value={person.id} />
+        <button 
+          type="submit" aria-label={isFailedDeletion ? "Retry" :  "Delete" }
+          name="_action" 
+          className="btn-sm"
+          value="delete">
+          {isFailedDeletion ? "Retry" : "x" }
+        </button>
+      </fetcher.Form>
+    </li>
+  )
 }
