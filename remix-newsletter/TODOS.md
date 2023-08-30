@@ -62,4 +62,4 @@ Let's do the following
 - Handle error (but don't do anything yet.  Observe the UI.)
 - Let's randomize error and handle error (fetcher.data) (style and add retry)
 - Add Optimistic UI to the form (create).  Let's not use fetcher this time to show it works with normal form as well. (add item immediately, but don't yet clear the form immediately)
-- 
+- Immediately wipe off the form so that user can type in new data (delete button pops in later but that's ok as per use case)

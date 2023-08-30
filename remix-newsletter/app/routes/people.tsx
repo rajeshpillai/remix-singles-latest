@@ -76,7 +76,7 @@ export default function People() {
 
   useEffect(() => {
     // If submission done and back to idle
-    if (!isAdding) {
+    if (isAdding) { // optimistic ui
       formRef.current.reset();
       nameRef.current?.focus();
     }
