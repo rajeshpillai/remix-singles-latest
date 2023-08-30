@@ -79,24 +79,8 @@ export default function People() {
       <h1>People</h1>
       { people.length ? (
         <ul>
-          {people.map(p => (
-            <li 
-              style={{
-                opacity: navigation.formData?.get("id") == p.id ? 0.25 : 1,
-              }}
-              key={p.id}>
-              {p.name} ({p.username}) { " "}
-              <Form method="post" 
-                style={{display: "inline"}}>
-                <input type="hidden" name="id" value={p.id} />
-                <button 
-                  type="submit" aria-label="delete" name="_action" 
-                  className="btn-sm"
-                  value="delete">
-                  x
-                </button>
-              </Form>
-            </li>
+          {people.map(person => (
+            <PersonItem person = {person} key={person.id} />
           ))}
           <li>
             <Form ref={formRef} method="post">
@@ -107,11 +91,34 @@ export default function People() {
                   { isAdding  ? "Adding..." : "Add"}
               </button>
             </Form>
-          </li>
+            </li>
         </ul> 
       ) : (
         <h2>No one around here!</h2>
       )}
     </div>
   );
+}
+
+function PersonItem({person}) {
+  let navigation = useNavigation();
+  let isDeleting = navigation.formData?.get("id") == person.id ;
+
+  return <li 
+    style={{
+      opacity: isDeleting ? 0.25 : 1,
+    }}
+    key={person.id}>
+    {person.name} ({person.username}) { " "}
+    <Form method="post" 
+      style={{display: "inline"}}>
+      <input type="hidden" name="id" value={person.id} />
+      <button 
+        type="submit" aria-label="delete" name="_action" 
+        className="btn-sm"
+        value="delete">
+        x
+      </button>
+    </Form>
+  </li>
 }
