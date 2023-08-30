@@ -22,6 +22,8 @@ export async function loader() {
   // const resp = await fetch('https://jsonplaceholder.typicode.com/users')
   // const data = await resp.json();
 
+  await new Promise((res) => setTimeout(res, Math.random() * 2000));
+
   if (store.users.length == 0) {
     const data = await Api.users.all();
     store.users = data;
@@ -45,7 +47,7 @@ export let action: ActionFunction = async ({request}) => {
 
   if (_action === "delete") {
     // Added delay to see the opacity effect
-    await new Promise((res) => setTimeout(res, 1000));
+    await new Promise((res) => setTimeout(res, Math.random() * 2000));
     const result = await Api.users.delete(values);
     return result;
   }
@@ -107,10 +109,10 @@ function PersonItem({person}) {
   // let isDeleting = navigation.formData?.get("id") == person.id ;
   let isDeleting = fetcher.formData?.get("id") == person.id ;
 
-  return <li 
-    style={{
-      opacity: isDeleting ? 0.25 : 1,
-    }}
+  return <li hidden={isDeleting}
+    // style={{
+    //   opacity: isDeleting ? 0.25 : 1,
+    // }}
     key={person.id}>
     {person.name} ({person.username}) { " "}
     <fetcher.Form method="post" 

@@ -50,3 +50,12 @@ let busy = navigation.state;
 - Fade UI on delete (Problem:  Delete multiple items, the effect gets cancelled as form navigation is singleton).  Fix this using useFetcher
 - Let's extract the person to it's own component (But still demo it in the developer console. Click on multiple items to delete and observe the request)
 - useFetcher (demo it in the network tab)
+- Radomize data to simulate issues.  Let's create chaos in the system (Remix will automatically cancel stale request)
+- 
+
+## Optimistic UI
+We know our server works, so let be optimistic and update the UI and eliminate pending state.
+What if optimism fails?
+Let's do the following
+- Hide item immediately on delete
+- 
