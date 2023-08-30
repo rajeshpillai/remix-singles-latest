@@ -44,3 +44,8 @@ let busy = navigation.state;
  
 ## Clearing inputs after submission
 - Clear and set focus (browser does automatically)
+- 
+
+## Concurrent mutations without causing navigation(useFetcher)
+- Fade UI on delete (Problem:  Delete multiple items, the effect gets cancelled as form navigation is singleton).  Fix this using useFetcher
+- 

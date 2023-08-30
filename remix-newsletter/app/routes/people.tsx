@@ -34,15 +34,20 @@ export let action: ActionFunction = async ({request}) => {
   // let values = Object.fromEntries(formData);
 
   let {_action, ...values} = Object.fromEntries(formData);
+
+  console.log("_action: ", _action);
   
   if (_action === "create") {
     const data = await Api.users.insert(values);
-    console.log("response: ", data);
-    return { success: true, data};
+    //console.log("response: ", data);
+    return { success: true};
   }
 
   if (_action === "delete") {
-    return await Api.users.delete(values);
+    // Added delay to see the opacity effect
+    await new Promise((res) => setTimeout(res, 1000));
+    const result = await Api.users.delete(values);
+    return result;
   }
 }
 
@@ -56,6 +61,7 @@ export default function People() {
   let isAdding = navigation.state === "submitting" &&
     navigation.formData.get("_action") === "create";
 
+
   let formRef = useRef();
   let nameRef = useRef();
 
@@ -67,13 +73,19 @@ export default function People() {
     }
   }, [isAdding])
 
+  console.log("navigation.formData.id: ", isAdding, navigation.state, navigation.formData?.get("_action"),  navigation.formData?.get("id"));
   return (
     <div>
       <h1>People</h1>
       { people.length ? (
         <ul>
           {people.map(p => (
-            <li key={p.id}>{p.name} ({p.username}) { " "}
+            <li 
+              style={{
+                opacity: navigation.formData?.get("id") == p.id ? 0.25 : 1,
+              }}
+              key={p.id}>
+              {p.name} ({p.username}) { " "}
               <Form method="post" 
                 style={{display: "inline"}}>
                 <input type="hidden" name="id" value={p.id} />

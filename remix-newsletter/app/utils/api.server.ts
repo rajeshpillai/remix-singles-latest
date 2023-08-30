@@ -17,15 +17,16 @@ const Api = {
       });
 
       const data = await resp.json();
-      console.log("store: ", store);
+      // console.log("store: ", store);
       store.users.push(data);
       return data;
     },
     "delete": async function (values) {
       console.log("DELETING ", values);
+      
       let userId = values.id;
       const users = store.users.filter(u =>  u.id != userId);
-      console.log(users);
+      // console.log(users);
       store.users = users;
       return values;
     }
