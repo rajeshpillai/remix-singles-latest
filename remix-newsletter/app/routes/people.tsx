@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import {Form, Link, useActionData, useLoaderData, useNavigation} from "@remix-run/react";
+import {Form, Link, useActionData, useLoaderData, useNavigation, useFetcher} from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 import { Api } from "~/utils/api.server";
 
@@ -101,8 +101,11 @@ export default function People() {
 }
 
 function PersonItem({person}) {
-  let navigation = useNavigation();
-  let isDeleting = navigation.formData?.get("id") == person.id ;
+  let fetcher = useFetcher();
+
+  // let navigation = useNavigation();
+  // let isDeleting = navigation.formData?.get("id") == person.id ;
+  let isDeleting = fetcher.formData?.get("id") == person.id ;
 
   return <li 
     style={{
@@ -110,7 +113,7 @@ function PersonItem({person}) {
     }}
     key={person.id}>
     {person.name} ({person.username}) { " "}
-    <Form method="post" 
+    <fetcher.Form method="post" 
       style={{display: "inline"}}>
       <input type="hidden" name="id" value={person.id} />
       <button 
@@ -119,6 +122,6 @@ function PersonItem({person}) {
         value="delete">
         x
       </button>
-    </Form>
+    </fetcher.Form>
   </li>
 }

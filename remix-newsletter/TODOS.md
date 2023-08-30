@@ -48,4 +48,5 @@ let busy = navigation.state;
 
 ## Concurrent mutations without causing navigation(useFetcher)
 - Fade UI on delete (Problem:  Delete multiple items, the effect gets cancelled as form navigation is singleton).  Fix this using useFetcher
-- Let's extract the person to it's own component
+- Let's extract the person to it's own component (But still demo it in the developer console. Click on multiple items to delete and observe the request)
+- useFetcher (demo it in the network tab)
