@@ -91,6 +91,12 @@ export default function People() {
           {people.map(person => (
             <PersonItem person = {person} key={person.id} />
           ))}
+          {isAdding && (
+            <li>
+              {navigation.formData?.get("name")} {" "}
+              {navigation.formData?.get("username")}
+            </li>
+          )}
           <li>
             <Form ref={formRef} method="post">
               <input ref={nameRef} type="text" name="name" /> {" "}
