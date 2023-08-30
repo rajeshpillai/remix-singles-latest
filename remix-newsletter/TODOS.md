@@ -65,3 +65,10 @@ Let's do the following
 - Immediately wipe off the form so that user can type in new data (delete button pops in later but that's ok as per use case)
 - Add button a new optimistic UI with disabled (so that the UI doesn't dance around)
 - Since we have OUI we can simple removing the isAdding from the add button
+- Scroll management with Remix and Router (For additional reading and practice)
+  - <NavLink preventScrollReset />
+  - <ScrollRestoration 
+      getKey = {location => {
+        return location.pathname;  // default location.key (unique)  (pathname -> save scroll position by URL)
+    }}
+    />
