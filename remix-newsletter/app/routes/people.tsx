@@ -95,6 +95,7 @@ export default function People() {
             <li>
               {navigation.formData?.get("name")} {" "}
               {navigation.formData?.get("username")}
+              <button disabled>x</button>
             </li>
           )}
           <li>
