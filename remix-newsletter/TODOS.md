@@ -58,4 +58,4 @@ We know our server works, so let be optimistic and update the UI and eliminate p
 What if optimism fails?
 Let's do the following
 - Hide item immediately on delete
-- 
+- Throw error on delete

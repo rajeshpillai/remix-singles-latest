@@ -47,6 +47,7 @@ export let action: ActionFunction = async ({request}) => {
 
   if (_action === "delete") {
     // Added delay to see the opacity effect
+    throw new Error("Kaboom!!!");
     await new Promise((res) => setTimeout(res, Math.random() * 2000));
     const result = await Api.users.delete(values);
     return result;
