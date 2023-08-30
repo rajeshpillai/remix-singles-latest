@@ -22,7 +22,7 @@ export async function loader() {
   // const resp = await fetch('https://jsonplaceholder.typicode.com/users')
   // const data = await resp.json();
 
-  await new Promise((res) => setTimeout(res, Math.random() * 2000));
+  //await new Promise((res) => setTimeout(res, Math.random() * 2000));
 
   if (store.users.length == 0) {
     const data = await Api.users.all();
@@ -47,10 +47,14 @@ export let action: ActionFunction = async ({request}) => {
 
   if (_action === "delete") {
     // Added delay to see the opacity effect
-    throw new Error("Kaboom!!!");
-    await new Promise((res) => setTimeout(res, Math.random() * 2000));
-    const result = await Api.users.delete(values);
-    return result;
+    try {
+      throw new Error("Kaboom!!!");
+      //await new Promise((res) => setTimeout(res, Math.random() * 2000));
+      const result = await Api.users.delete(values);
+      return result;
+    } catch(e) {
+      return { error: true}
+    }
   }
 }
 

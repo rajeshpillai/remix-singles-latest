@@ -59,3 +59,4 @@ What if optimism fails?
 Let's do the following
 - Hide item immediately on delete
 - Throw error on delete
+- Handle error (but don't do anything yet.  Observe the UI.)
