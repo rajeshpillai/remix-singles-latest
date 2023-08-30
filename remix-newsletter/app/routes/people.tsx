@@ -104,7 +104,7 @@ export default function People() {
               <input type="text" name="username" /> {" "}
               <button className="btn-sm" type="submit" 
                 name="_action" value="create" disabled={isAdding}>
-                  { isAdding  ? "Adding..." : "Add"}
+                  Add
               </button>
             </Form>
             </li>

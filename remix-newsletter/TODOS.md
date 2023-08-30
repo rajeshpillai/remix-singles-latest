@@ -64,3 +64,4 @@ Let's do the following
 - Add Optimistic UI to the form (create).  Let's not use fetcher this time to show it works with normal form as well. (add item immediately, but don't yet clear the form immediately)
 - Immediately wipe off the form so that user can type in new data (delete button pops in later but that's ok as per use case)
 - Add button a new optimistic UI with disabled (so that the UI doesn't dance around)
+- Since we have OUI we can simple removing the isAdding from the add button
